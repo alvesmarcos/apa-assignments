@@ -1,8 +1,8 @@
 ## Ordenação 02
+leia mais [APA 20161](http://leobezerra.ci.ufpb.br/disciplinas/APA/2016-1/)
+>Implemente o quicksort para ser aplicado a uma lista simplesmente encadeada.
 
-* Implemente o quicksort para ser aplicado a uma lista simplesmente encadeada.
-
-## usage
+## Instruções
 ```sh 
 $ ruby tests2.rb
 ```
