@@ -36,8 +36,15 @@ class Vector
 		get(index).content
 	end
 
+	# clear vector
+	# no return
+	def clear
+		@first = nil
+		@last = nil
+	end
+
 	# delete content the index
-	# return boolean
+	# no return
 	def delete_at(index)	
 		if index==1
 			@first = tmp.front
@@ -50,7 +57,6 @@ class Vector
 			tmp.front.back = tmp.back
 		end
 		@length-=1
-		true
 	end
 
 	# return content the index one
@@ -98,7 +104,6 @@ class Vector
 			tmp.back = node
 		end
 		@length+=1
-		true
 	end
 
 	# return content the index `n`
