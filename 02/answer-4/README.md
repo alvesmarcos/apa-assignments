@@ -4,5 +4,8 @@ leia mais [APA 20161](http://leobezerra.ci.ufpb.br/disciplinas/APA/2016-1/)
 
 ## Instruções
 ```sh 
-$ ruby tests4.rb
+$ ruby colors.rb
 ```
+1. Digite o tamanho do array
+2. Digite as N cores (RGB) correspondentes a entrada do passo 1.
+3. Digite os N valores correspondentes as cores do passo 2. 
