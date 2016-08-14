@@ -153,20 +153,4 @@ class Vector
 			tmp = tmp.front
 		end
 	end
-
-	private :get
 end
-
-#test
-v = Vector.new
-
-v.push(3)
-v.push(9)
-v.push(1)
-v.push(2)
-
-v.delete_at(2)
-
-v.insert(4, 10)
-
-v.to_s
