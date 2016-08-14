@@ -4,29 +4,47 @@
 #++
 
 class Node
+	attr_accessor :content, :back, :front
 	# initialize attr.
 	# constructor
-	def initialize(content, front=nil, back=nil)
-		@content=content
-		@front=front
-		@back=back
+	def initialize(content, back=nil, front=nil)
+		@content = content
+		@back = back
+		@front = front
 	end
 end
 
 class Vector
-	attr_reader :length, :first
+	attr_reader :length, :first, :last
 	# initialize attr.
 	# constructor
-	def initialize(length=0)
-		@length = length
+	def initialize
+		@length = 0
 		@first = nil
 		@last = nil
 	end
 
+	# get any element
+	# return content
+	def at(index)
+		get(index).content
+	end
+
 	# delete content the index
-	# no return
-	def delete_at(index)
-		#TODO
+	# return boolean
+	def delete_at(index)	
+		if index==1
+			@first = tmp.front
+			@first.back = nil
+		elsif @length==index
+			pop;
+		else
+			tmp = get(index)
+			tmp.back.front = tmp.front 
+			tmp.front.back = tmp.back
+		end
+		@length-=1
+		true
 	end
 
 	# return content the index one
@@ -35,15 +53,46 @@ class Vector
 	end
 
 	# get any element
-	# return content
+	# return adress
 	def get(index)
-		#TODO
+		if length/2 >= index 
+			tmp = @first
+			half = false 
+			count = 1
+		else 
+			tmp = @last
+			half = true
+			count = @length
+		end
+
+		until count==index
+			if half
+				tmp = tmp.back 
+				count-=1
+			else
+				tmp = tmp.front
+				count+=1
+			end
+		end
+		tmp
 	end
 
 	# insert content the index
 	# no return
 	def insert(index, content)
-		#TODO
+		if index==1 and @length!=0
+			node = Node.new(content, nil, @first)
+			@first = node
+		elsif @length+1==index
+			push(content)
+		else
+			tmp = get(index)
+			node = Node.new(content, tmp.back, tmp)
+			tmp.back.front = node
+			tmp.back = node
+		end
+		@length+=1
+		true
 	end
 
 	# return content the index `n`
@@ -56,18 +105,33 @@ class Vector
 		@length
 	end
 
-	# insert element in last
-	# no return
-	def push(value)
-		node = Node.new(value, nil, @last)
-		@last = node
-		@first+=1
-	end
-
 	# delete element in last
 	# no return
 	def pop
-		@last.back = @last
+		if @length==1
+			@last = nil
+			@first = nil
+		else 
+			@last = @last.back
+			@last.front = nil
+			@first = @last if @length==2
+		end
+		@length-=1
+	end
+
+	# insert element in last
+	# no return
+	def push(value)
+		node = Node.new(value)
+		if @length==0
+			@last = node
+			@first = node
+		else
+			@last.front = node
+			node.back = @last
+			@last = node
+		end
+		@length+=1
 	end
 
 	# A COPY
@@ -81,4 +145,28 @@ class Vector
 	def sort!
 		#TODO
 	end
+
+	def to_s
+		tmp = @first
+		until tmp==nil
+			puts tmp.content
+			tmp = tmp.front
+		end
+	end
+
+	private :get
 end
+
+#test
+v = Vector.new
+
+v.push(3)
+v.push(9)
+v.push(1)
+v.push(2)
+
+v.delete_at(2)
+
+v.insert(4, 10)
+
+v.to_s
