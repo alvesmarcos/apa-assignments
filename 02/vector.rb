@@ -3,6 +3,8 @@
 # Author: Marcos Alves
 #++
 
+require './sort'
+
 class Node
 	attr_accessor :content, :back, :front
 	# initialize attr.
@@ -15,6 +17,10 @@ class Node
 end
 
 class Vector
+	# module sort 
+	# method quicksort
+	include Sort
+
 	attr_reader :length, :first, :last
 	# initialize attr.
 	# constructor
@@ -134,16 +140,10 @@ class Vector
 		@length+=1
 	end
 
-	# A COPY
-	# return a copy of the sorted
-	def sort
-		#TODO
-	end
-
 	# DIRECT access the vector
 	# no return
 	def sort!
-		#TODO
+		quick!(self, 1, length)
 	end
 
 	def to_s
